@@ -75,3 +75,16 @@
     - It makes file paths dynamic rather than hardcoded.
 
 3. Do a git add-commit-push before initialising DVC.
+4. Now we do "dvc init" (creates .dvcignore, .dvc)
+5. Now do "mkdir S3" (create a new S3 directory) .
+    > Now DVC has to be told where it's remote origin is, for the ease here,
+    we have created a S3 folder here, and will set our remote origin to it.
+6. Now we do "dvc remote add -d myremote S3" .
+7. Next "dvc add data/"
+    > this simply means that after commiting, track all files inside the "data" folder 
+    everytime it changes. dvc is responsible the versioning.
+    > after hitting enter you'll get an error : git is already tracking it.
+    > you need to stop git from tracking it using
+    "git rm -r --cached 'data'
+    git commit -m "stop tracking data""
+8. Again we do "dvc add data/" again, then "git add data.dvc .gitignore" to track version IDs.
