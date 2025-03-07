@@ -88,3 +88,8 @@
     "git rm -r --cached 'data'
     git commit -m "stop tracking data""
 8. Again we do "dvc add data/" again, then "git add data.dvc .gitignore" to track version IDs.
+9. Now do "dvc commit" and then "dvc push".
+    > 2 files(data) get pushed in S3. But why 2?
+    > one file is the unique token , the other file is the data itself.
+10. Do a git add-commit-push to mark this stage as first versio of the data.
+11. Now make chnages to the imp_code.py to append a new row of data, check changes via "dvc status"
