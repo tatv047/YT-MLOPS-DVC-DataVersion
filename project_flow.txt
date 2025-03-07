@@ -1,0 +1,77 @@
+1. Create git repo and clone it in local
+2. Create imp_code.py and add code to it .(it'll save a csv file to a new "data" folder)
+> the explaination of the code in imp_code.py is as follows:-
+    In your code, the `os` module is used for **handling file paths and directory creation** in a cross-platform way. Let’s break it down step by step.
+
+    1. Importing Required Modules
+
+    ```python
+    import pandas as pd
+    import os
+    ```
+    - `pandas` is imported for handling tabular data.
+    - `os` is imported to interact with the operating system.
+
+    2. Creating a Sample DataFrame
+
+    ```python
+    data = {'Name':['Alice','Bob','Charlie'],
+            'Age' : [25,30,35],
+            'City': ['NYC','LA','DC']}
+
+    df = pd.DataFrame(data)
+    ```
+    - This creates a simple DataFrame with three columns: `'Name'`, `'Age'`, and `'City'`.
+
+    3. Ensuring the Directory Exists
+
+    ```python
+    data_dir = 'data'
+    os.makedirs(data_dir, exist_ok=True)
+    ```
+
+    - `os.makedirs(data_dir, exist_ok=True)` ensures that a directory named `'data'` exists.
+    - If `'data'` does not exist, it creates the directory.
+    - `exist_ok=True` prevents an error if the directory already exists.
+
+    Why use `os.makedirs`? 
+    - It makes sure the directory is created before saving the file.
+    - It works on all operating systems (Windows, macOS, Linux).
+
+    4. Constructing the File Path
+
+    ```python
+    file_path = os.path.join(data_dir, 'sample_data.csv')
+    ```
+    - `os.path.join()` constructs a valid file path in a cross-platform way.
+    - On Windows, it returns `'data\\sample_data.csv'` (using `\` as a separator).
+    - On macOS/Linux, it returns `'data/sample_data.csv'` (using `/` as a separator).
+
+    Why use `os.path.join()`?
+    - Avoids hardcoding file paths, ensuring compatibility across different OS.
+
+    5. Saving the DataFrame to a CSV File
+
+    ```python
+    df.to_csv(file_path, index=False)
+    ```
+    - Saves the DataFrame as a CSV file in the `'data'` directory.
+    - `index=False` prevents pandas from adding an extra index column.
+
+    6. Printing the Saved File Path
+
+    ```python
+    print(f"csv file saved to : {file_path}")
+    ```
+    - This confirms that the CSV file was successfully saved.
+
+    Summary of `os` Module Usage
+    1. **`os.makedirs(data_dir, exist_ok=True)`** → Ensures the `'data'` directory exists.
+    2. **`os.path.join(data_dir, 'sample_data.csv')`** → Constructs a valid file path.
+
+    Why is `os` useful here?
+    - It ensures that your code works on different operating systems.
+    - It prevents errors by automatically creating missing directories.
+    - It makes file paths dynamic rather than hardcoded.
+
+3. Do a git add-commit-push before initialising DVC.
